@@ -40,5 +40,7 @@ router.patch(
 //GET
 router.get("/logout", authorize, controller.logout);
 
+//GET created users
+router.get("/users", authorize, controller.getCreatedUsers);
 
 export default router;

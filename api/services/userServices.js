@@ -1,7 +1,6 @@
 import User from "../models/userModel";
 import encryptionService from "../services/encryptionService";
 import jwt from "../services/authorizationService";
-// import sendEmail from "../utilities/email";
 
 const services = {};
 
@@ -76,6 +75,19 @@ services.getUser = (_id) =>
   new Promise(async (res, rej) => {
     try {
       const user = await User.findById(_id);
+
+      res(user);
+    } catch (e) {
+      console.log(e);
+      rej(e);
+    }
+  });
+
+//==========================================Get User Service==========================================
+services.getCreatedUsers = (_id) =>
+  new Promise(async (res, rej) => {
+    try {
+      const user = await User.find({ created_by: _id });
 
       res(user);
     } catch (e) {

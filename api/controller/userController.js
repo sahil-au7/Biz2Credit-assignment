@@ -40,6 +40,18 @@ controller.get = async (req, res) => {
   }
 };
 
+//Get all created users
+controller.getCreatedUsers = async (req, res) => {
+  try {
+    //Get User
+    const user = await service.getCreatedUsers(req._id);
+
+    res.status(201).json(user);
+  } catch (e) {
+    handleErrors(e, res);
+  }
+};
+
 //UPDATE User Details
 controller.update = async (req, res) => {
   try {
