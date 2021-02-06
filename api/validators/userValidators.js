@@ -60,7 +60,7 @@ validator.login = [
         new Promise(async (res, rej) => {
           try {
             const user = await User.findOne({
-              email,
+              email: email.toLowerCase(),
             });
 
             if (!user) throw new Error(409, "User doesn't exists");
@@ -82,7 +82,7 @@ validator.login = [
           //Get user related to this email
           //NOTE : Make sure to add .select('password) in the query to get the password field in the returned document
           const user = await User.findOne({
-            email,
+            email: email.toLowerCase(),
           }).select("password");
 
           //Check if password is correct

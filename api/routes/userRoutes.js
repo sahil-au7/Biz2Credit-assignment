@@ -19,7 +19,7 @@ router.post(
 
 //POST USER Login
 router.post(
-  "/login",
+  "/signin",
   validator.login,
   handleValidationErrors,
   controller.login

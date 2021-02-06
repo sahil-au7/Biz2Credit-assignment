@@ -9,16 +9,21 @@ services.signup = (data) =>
   new Promise(async (res, rej) => {
     try {
       //Get Password and hash it
-      const { password, ...remData } = data;
+      const { email, password, ...remData } = data;
+
+      console.log(email);
 
       //Get hash
       const hash = await encryptionService.encrypt(password);
 
       const user = await new User({
+        email: email.toLowerCase(),
         password: hash,
         ...remData,
         isLoggedIn: true,
       }).save();
+
+      console.log(user);
 
       //Generate Token
       const token = await jwt.generate(user);
@@ -43,7 +48,7 @@ services.login = (data) =>
 
       const user = await User.findOneAndUpdate(
         {
-          email,
+          email: email.toLowerCase(),
         },
         {
           $set: {
