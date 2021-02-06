@@ -26,7 +26,7 @@ router.post(
 );
 
 //GET Get USER details
-router.get("/", authorize, controller.get);
+// router.get("/", authorize, controller.get);
 
 //UPDATE User Details
 router.patch(
@@ -38,9 +38,9 @@ router.patch(
 );
 
 //GET
-router.get("/logout", authorize, controller.logout);
+// router.get("/logout", authorize, controller.logout);
 
 //GET created users
-router.get("/users", authorize, controller.getCreatedUsers);
+router.get("/", authorize, controller.getCreatedUsers);
 
 export default router;

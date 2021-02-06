@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   Avatar,
   Button,
@@ -8,12 +8,11 @@ import {
   Typography,
   Container,
 } from "@material-ui/core";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
-// import Icon from "./icon";
-// import { signin, signup } from "../../actions/auth";
-// import { AUTH } from "../../constants/actionTypes";
+import { signin, signup } from "../../actions/auth";
+import { AUTH } from "../../constants/actionTypes";
 import useStyles from "./styles";
 import Input from "./Input";
 
@@ -27,30 +26,30 @@ const initialState = {
 const SignUp = () => {
   const [form, setForm] = useState(initialState);
   const [isSignup, setIsSignup] = useState(false);
-  //   const dispatch = useDispatch();
-  //   const history = useHistory();
+  const dispatch = useDispatch();
+  const history = useHistory();
   const classes = useStyles();
 
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => setShowPassword(!showPassword);
 
   const switchMode = () => {
-    //   setForm(initialState);
+    setForm(initialState);
     setIsSignup((prevIsSignup) => !prevIsSignup);
-    //   setShowPassword(false);
+    setShowPassword(false);
   };
 
   const handleSubmit = (e) => {
-    //   e.preventDefault();
-    //   if (isSignup) {
-    //     dispatch(signup(form, history));
-    //   } else {
-    //     dispatch(signin(form, history));
-    //   }
+    e.preventDefault();
+    if (isSignup) {
+      dispatch(signup(form, history));
+    } else {
+      dispatch(signin(form, history));
+    }
   };
 
-  //   const handleChange = (e) =>
-  //     setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
 
   return (
     <Container component="main" maxWidth="xs">
@@ -68,34 +67,34 @@ const SignUp = () => {
                 <Input
                   name="name"
                   label="Name"
-                  //   handleChange={handleChange}
+                  handleChange={handleChange}
                   minLength="3"
                   maxLength="20"
                   autoFocus
+                />
+                <Input
+                  name="contact"
+                  label="Contact"
+                  handleChange={handleChange}
+                  type="tel"
+                  minLength="10"
+                  maxLength="10"
+                  value="number"
                 />
               </>
             )}
             <Input
               name="email"
               label="Email Address"
-              //   handleChange={handleChange}
+              handleChange={handleChange}
               type="email"
-            />
-            <Input
-              name="contact"
-              label="Contact"
-              //   handleChange={handleChange}
-              type="tel"
-              minLength="10"
-              maxLength="10"
-              value="number"
             />
             <Input
               name="password"
               label="Password"
               minLength="8"
               maxLength="20"
-              //   handleChange={handleChange}
+              handleChange={handleChange}
               type={showPassword ? "text" : "password"}
               handleShowPassword={handleShowPassword}
             />

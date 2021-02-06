@@ -10,6 +10,7 @@ controller.signup = async (req, res) => {
   try {
     //Create new user
     const user = await service.signup(req.body);
+    console.log(req.body);
 
     res.status(201).json(user);
   } catch (e) {
