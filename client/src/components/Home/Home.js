@@ -1,15 +1,36 @@
 import React, { useEffect } from "react";
 import "./Home.css";
-import axios from "axios";
-
-import { Button, Paper, Grid, Container } from "@material-ui/core";
+import Card from "./Card";
+import { useDispatch } from "react-redux";
+import Button from "@material-ui/core/Button";
+import { CircularProgress } from "@material-ui/core";
+import { getUser } from "../../actions/user";
+import { useSelector } from "react-redux";
 
 const Home = () => {
-  useEffect(() => {});
+  const users = useSelector((payload) => payload.user);
 
-  return (
-    <div>
-      <Container></Container>
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUser());
+  }, [dispatch]);
+
+  return !users.length ? (
+    <CircularProgress className="loader" />
+  ) : (
+    <div className="home">
+      <div className="home__title">
+        <h1>List Of Users</h1>
+        <Button variant="contained" color="primary">
+          Create New Users
+        </Button>
+      </div>
+      <div className="home__cards">
+        {users?.map((user) => (
+          <Card key={user._id} user={user} />
+        ))}
+      </div>
     </div>
   );
 };

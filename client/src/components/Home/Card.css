@@ -1,0 +1,24 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+.card__info {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 1px 1.5px black;
+  height: 220px;
+  justify-content: space-between;
+  max-width: 200px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.card__buttons {
+  display: flex;
+  margin-top: 10px;
+  justify-content: space-between;
+}
